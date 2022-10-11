@@ -1,3 +1,6 @@
+/**
+ * Estructura general para visualizacion API
+ */
 function fetchData(){
     fetch("https://reqres.in/api/users?delay=3")
     .then(response =>{
@@ -25,8 +28,8 @@ function fetchData(){
             `
         }).join("");
         console.log(html);
-        // localStorage.setItem('clave',JSON.stringify(html));
-        // document.querySelector('#app').innerHTML='<p>prueba</p>'
+        // localStorage.setItem('clave',JSON.stringify(html)); //Para preubas
+        // document.querySelector('#app').innerHTML='<p>prueba</p>' //Para pruebas
         document.querySelector('#app').insertAdjacentHTML("afterbegin",html);
        
     }).catch(error=>{
@@ -44,18 +47,26 @@ function usersToLocalStorage(data) {
         usersData: [...data],
         time: Date.now() + 10000
     }
-    localStorage.setItem("userData", JSON.stringify(users)); //To convert object to JSON: JSON.stringify(object)
+    localStorage.setItem("userData", JSON.stringify(users));
 }
-
-function readUser() {
+/**
+ * Carga de los datos por medio del boton y comparación de datos locales y api
+ */
+function leerDatos() {
     const user = JSON.parse(localStorage.getItem("userData"));
     user && user.time > Date.now() ?
-        displayUsers(user.usersData) :
-        fetchData();
-        
+    contenedorUsuarios(user.usersData):fetchData()
+}
+
+function contenedorUsuarios(data) {
+    const containerdiv =document.querySelector('#app')
+    containerdiv.innerHTML= ""; 
+    // containerdiv.insertAdjacentHTML= ""; //pruebas
+    data.forEach(user => containerdiv.innerHTML += displayUser(user));
 }
 
 
+// Para pruebas en html:
             // <div class="user">
             // <p><img src="${user.avatar}" alt="${user.first_name}"></p>
             // <p>Name: ${user.id}</p>
