@@ -1,0 +1,12 @@
+.user{
+    background-color: rgba(229, 241, 58, 0.836);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    /* outline: 5px solid 	hsl(22, 100%, 50%); */
+    border: 9px ridge #ee5113;
+
+
+}
+.borders{  
+    border: 9px ridge #702b10; ;
+}
